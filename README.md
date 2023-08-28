@@ -5,7 +5,7 @@ lang: zh-CN
 
 欢迎来到OpenCore安装后的教程！请注意：如果你还没有安装macOS，我们建议你跟随以下指南：
 
-* [OpenCore安装教程（暂未翻译）](https://xuanxuan1231.github.io/OpenCore-Install-Guide/)
+* [OpenCore安装教程](https://xuanxuan1231.github.io/OpenCore-Install-Guide/)
 
 虽然这里的信息可以应用于OpenCore和Clover，但我们主要关注OpenCore的安装。因此，如果你遇到任何问题，你需要进行更多的研究。
 
