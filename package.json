@@ -1,15 +1,15 @@
 {
-    "name": "OpenCore-Post-Install",
+    "name": "OpenCore安装后",
     "version": "0.8.8",
-    "description": "OpenCore Post-Install guide",
+    "description": "OpenCore安装后指南",
     "main": "",
     "author": {
-        "name": "Dortania",
-        "url": "https://github.com/dortania"
+        "name": "Wenxuan",
+        "url": "https://github.com/xuanxuan1231"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/dortania/OpenCore-Post-Install.git"
+        "url": "git+https://github.com/xuanxuan1231/OpenCore-Post-Install-new.git"
     },
     "scripts": {
         "windev": "SET NODE_OPTIONS=--openssl-legacy-provider && vuepress dev",
@@ -46,5 +46,5 @@
         "vuepress-plugin-fulltext-search": "^2.2.1",
         "vuepress-theme-succinct": "^1.7.2"
     },
-    "homepage": "https://dortania.github.io/OpenCore-Post-Install/"
+    "homepage": "https://xuanxuan1231.github.io/OpenCore-Post-Install/"
 }
