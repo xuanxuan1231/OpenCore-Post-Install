@@ -55,7 +55,7 @@ module.exports = {
 
     themeConfig: {
         lastUpdated: true,
-        repo: 'https://github.com/xuanxuan1231/OpenCore-Post-Install-new',
+        repo: 'https://github.com/xuanxuan1231/OpenCore-Post-Install',
         editLinks: true,
         editLinkText: '帮助我们改进此页！',
         logo: '/homepage.png',
