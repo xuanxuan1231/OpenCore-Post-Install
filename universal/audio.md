@@ -1,51 +1,51 @@
-# Fixing audio with AppleALC
+# 用AppleALC修复音频
 
-So to start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
+因此，首先，我们假设您已经安装了Lilu和AppleALC，如果您不确定它是否已正确加载，则可以在终端中运行以下命令（这也将检查AppleHDA是否已加载，因为没有这个AppleALC就没有什么可修补的）：
 
 ```sh
 kextstat | grep -E "AppleHDA|AppleALC|Lilu"
 ```
 
-If all 3 show up, you're good to go. And make sure VoodooHDA **is not present**. This will conflict with AppleALC otherwise.
+如果3个都出现，您就可以开始了。并确保VoodooHDA **不存在**。否则，这将与AppleALC冲突。
 
-If you're having issues, see the [Troubleshooting section](../universal/audio.md#troubleshooting)
+如果您遇到问题，请参阅[问题排查部分](../universal/audio.md#troubleshooting)
 
-## Finding your layout ID
+## 查找你的layout ID
 
-So for this example, we'll assume your codec is ALC1220. To verify yours, you have a couple options:
+因此，对于此示例，我们假设您的编解码器为ALC1220。要验证您的，您有以下几种选择：
 
-* Checking motherboard's spec page and manual
-* Check Device Manager in Windows
-* Check HWInfo64 in Windows
-  * Make sure both Summary-only and Sensors-only are deselected when opening
-* Check AIDA64 Extreme in Windows
-* Run `cat` in terminal on Linux
+* 检查主板的规格页和手册
+* 检查Windows中的“设备管理器”
+* 检查Windows下的HWInfo64
+  * 确保在打开时取消选择Summary-only和Sensors-only
+* 在Windows中检查AIDA64 Extreme
+* 在Linux的终端上运行`cat`
   * `cat /proc/asound/card0/codec#0 | less`
 
-Now with a codec, we'll want to cross reference it with AppleALC's supported codec list:
+现在有了编解码器，我们想交叉引用它与AppleALC支持的编解码器列表:
 
-* [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
+* [AppleALC支持的编解码器](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
 
-With the ALC1220, we get the following:
+使用ALC1220，我们得到以下结果:
 
 ```
 0x100003, layout 1, 2, 3, 5, 7, 11, 13, 15, 16, 21, 27, 28, 29, 34
 ```
 
-So from this it tells us 2 things:
+因此，它告诉我们两件事:
 
-* Which hardware revision is supported(`0x100003`), only relevant when multiple revisions are listed with different layouts
-* Various layout IDs supported by our codec(`layout 1, 2, 3, 5, 7, 11, 13, 15, 16, 21, 27, 28, 29, 34`)
+* 支持哪个硬件版本(`0x100003`)，仅在列出具有不同布局的多个版本时相关
+* 我们的编解码器支持的layout ID(`layout 1, 2, 3, 5, 7, 11, 13, 15, 16, 21, 27, 28, 29, 34`)
 
-Now with a list of supported layout IDs,  we're ready to try some out
+现在有了支持的layout ID列表，我们准备进行一些尝试
 
-**Note**: If your Audio Codec is ALC 3XXX this is likely false and just a rebranded controller, do your research and see what the actual controller is.
+**Note**: 如果你的音频编解码器是ALC 3XXX，这很可能是假的，只是一个重新命名的控制器，做你的研究，看看真正的控制器是什么。
 
-* An example of this is the ALC3601, but when we load up Linux the real name is shown: ALC 671
+* 这方面的一个例子是ALC3601，但是当我们加载Linux时，显示的是真实名称：ALC 671
 
-## Testing your layout
+## 测试你的layout
 
-To test out our layout IDs, we're going to be using the boot-arg `alcid=xxx` where xxx is your layout. Remember that to try layout IDs **one at a time**. Do not add multiple IDs or alcid boot-args, if one doesn't work then try the next ID and etc
+为了测试我们的layout ID，我们将使用boot-arg`alcid=xxx`，其中xxx是您的layout。记住，**一次**尝试**一个**布局id 。不要添加多个ID或alcid启动参数，如果一个不工作，然后尝试下一个ID等
 
 ```
 config.plist
@@ -55,19 +55,19 @@ config.plist
           ├── boot-args | String | alcid=11
 ```
 
-If no layout ID works, try creating [SSDT-HPET fixes](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) for your system - these are required on laptops and some desktops for AppleHDA to work.
+如果没有布局ID工作，尝试为您的系统创建[SSDT-HPET修复](https://xuanxuan1231.github.io/Getting-Started-With-ACPI/Universal/irq.html)-AppleHDA为笔记本和一些台式机工作时需要。
 
-## Making Layout ID more permanent
+## 使layout ID更永久
 
-Once you've found a Layout ID that works with your hack, we can create a more permanent solution for closer to how real macs set their Layout ID.
+一旦你找到了一个与你的黑苹果工作的布局ID，我们可以创建一个更永久的解决方案，更接近真实的mac设置他们的布局ID。
 
-With AppleALC, there's a priority hierarchy with which properties are prioritized:
+在AppleALC中，有一个优先级结构，属性的优先级是这样的:
 
-1. `alcid=xxx` boot-arg, useful for debugging and overrides all other values
-2. `alc-layout-id` in DeviceProperties, **should only be used on Apple hardware**
-3. `layout-id` in DeviceProperties, **should be used on both Apple and non-Apple hardware**
+1. `alcid=xxx` boot-arg，用于调试并覆盖所有其他值
+2. `alc-layout-id` 在DeviceProperties,，**应该只在苹果硬件上使用**
+3. `layout-id` 在DeviceProperties，**应该在苹果和非苹果硬件上使用**
 
-To start, we'll need to find out where our Audio controller is located on the PCI map. For this, we'll be using a handy tool called [gfxutil](https://github.com/acidanthera/gfxutil/releases) then with the macOS terminal:
+首先，我们需要找出音频控制器在PCI地图上的位置。为此，我们将使用一个名为[gfxutil](https://github.com/acidanthera/gfxutil/releases)的方便工具，然后在macOS终端上使用:
 
 ```sh
 path/to/gfxutil -f HDEF
@@ -75,32 +75,33 @@ path/to/gfxutil -f HDEF
 
 ![](../images/post-install/audio-md/gfxutil-hdef.png)
 
-Then add this PciRoot with the child `layout-id` to your config.plist under DeviceProperties -> Add:
+然后将这个PciRoot和子配置`layout-id`添加到你的config.plist中DeviceProperties -> Add部分:
 
 ![](../images/post-install/audio-md/config-layout-id.png)
 
-Note that AppleALC can accept both Decimal/Number and Hexadecimal/Data, generally the best method is Hex as you avoid any unnecessary conversions. You can use a simple [decimal to hexadecimal calculator](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to find yours. `printf '%x\n' DECI_VAL`:
+请注意，AppleALC可以接受十进制/数字和十六进制/数据，通常最好的方法是十六进制，因为你避免了任何不必要的转换。你可以使用一个简单的[十进制到十六进制计算器](https://www.rapidtables.com/convert/number/decimal-to-hex.html)来找到你的答案。`printf '%x\n' DECI_VAL`:
 
 ![](../images/post-install/audio-md/hex-convert.png)
 
-So in this example, `alcid=11` would become  either:
+所以在这个例子中，`alcid=11`可以变成:
 
 * `layout-id | Data | <0B000000>`
 * `layout-id | Number | <11>`
 
-Note that the final HEX/Data value should be 4 bytes in total(ie. `0B 00 00 00` ), for layout IDs surpassing 255(`FF 00 00 00`) will need to remember that the bytes are swapped. So 256 will become `00 01 00 00`
+请注意，最终的HEX/Data值总共应该是4个字节（ `0B 00 00 00`，对于layout ID超过255（`FF 00 00 00`）将需要记住字节被交换。所以256就变成了`00 01 00 00`
 
-* HEX Swapping and data size can be completely ignored using the Decimal/Number method
+* 使用十进制/数字方法可以完全忽略十六进制交换和数据大小
 
-**Reminder**: You **MUST** remove the boot-arg afterwards, as it will always have the top priority and so AppleALC will ignore all other entries like in DeviceProperties
 
-## Miscellaneous issues
+**提醒**:你之后**必须**删除boot-arg，因为它将始终具有最高优先级，不删除的话AppleALC将忽略所有如DeviceProperties的其他条目
 
-### No Mic on AMD
+## 其他问题
 
-* This is a common issue with when running AppleALC with AMD, specifically no patches have been made to support Mic input. At the moment the "best" solution is to either buy a USB DAC/Mic or go the VoodooHDA.kext method. Problem with VoodooHDA is that it's been known to be unstable and have worse audio quality than AppleALC
+### AMD上没有麦克风
 
-### Same layout ID from Clover doesn't work on OpenCore
+* 这是与AMD一起运行AppleALC时的常见问题，特别是没有补丁来支持麦克风输入。目前“最好”的解决方案是买一个USB DAC/麦克风。实际上VoodooHDA.kext方法也可以，但VoodooHDA的问题在于它不稳定，音质也比AppleALC差
+
+### Clover中相同的layout ID不在OpenCore上工作
 
 This is likely do to IRQ conflicts, on Clover there's a whole sweep of ACPI hot-patches that are applied automagically. Fixing this is a little bit painful but [SSDTTime](https://github.com/corpnewt/SSDTTime)'s `FixHPET` option can handle most cases.
 
