@@ -20,6 +20,6 @@
 
 当你挂载主驱动器的EFI时，你可能会看到一个名为“APPLE”的文件夹，这是用于更新真实mac上的固件，但对我们的硬件没有影响。您可以擦除EFI分区上的所有内容，并将其替换为USB上的分区
 
-## Special notes for legacy users
+## 旧版用户的特别注意事项
 
 当转移到您的EFI时，仍然有需要写入的引导扇区，以便您的非uefi BIOS能够找到它。所以不要忘记在macOS驱动器上重新运行[' BootInstallARCH.tool '](https://xuanxuan1231.github.io/OpenCore-Install-Guide/installer-guide/mac-install.html#legacy-setup)。
