@@ -117,11 +117,11 @@ For odd cases where RTC and HPET take IRQs from other devices like USB and audio
 为了排除故障，我们需要复习几件事:
 
 * [检查你是否有正确的内核扩展](#检查你是否有正确的内核扩展)
-* [检查AppleALC补丁是否正确](#检查AppleALC补丁是否正确)
-* [检查AppleHDA是否正常](#检查AppleHDA是否正常)
+* [检查AppleALC补丁是否正确](#检查applealc补丁是否正确)
+* [检查AppleHDA是否正常](#检查apphda是否正常)
 * [AppleALC工作不一致](#applealc工作不一致)
 * [AppleALC在多个声卡下不能正常工作](#applealc在多个声卡下不能正常工作)
-* [Windows重启后，AppleALC无法工作](#Windows重启后，AppleALC无法工作)
+* [Windows重启后，AppleALC无法工作](#windows重启后，applealc无法工作)
 
 ### 检查你是否有正确的内核扩展
 
