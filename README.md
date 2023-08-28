@@ -1,3 +1,6 @@
+---
+lang: zh-CN
+---
 # OpenCore安装后
 
 欢迎来到OpenCore安装后的教程！请注意：如果你还没有安装macOS，我们建议你跟随以下指南：

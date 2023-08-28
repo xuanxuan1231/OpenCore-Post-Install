@@ -20,7 +20,12 @@ module.exports = {
         ["link", {
             rel: "'stylesheet",
             href: "/styles/website.css"
-        },]
+        }],
+        ["link", {
+            rel: "shortcut icon",
+            type: "image/x-icon",
+            href: "/favicon.ico"
+        }]
     ],
     base: '/OpenCore-Post-Install/',
 
