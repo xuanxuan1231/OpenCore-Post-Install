@@ -14,7 +14,7 @@
 
 ![](../images/post-install/oc2hdd-md/hdd-mount.png)
 
-现在，完成这些后，让我们挂载macOS驱动器。对于macOS Catalina, macOS实际上被划分为2个卷:系统分区和用户分区。这意味着MountEFI可以在它的选择器中报告多个驱动器，但每个分区仍然会共享相同的EFI(UEFI规范只允许每个驱动器1个EFI)。您可以判断它是否与磁盘**X**sY是同一个驱动器(Y只是表示它是哪个分区)。
+现在，完成这些后，让我们挂载macOS驱动器。对于macOS Catalina, macOS实际上被划分为2个卷:系统分区和用户分区。这意味着MountEFI可以在它的选择器中报告多个驱动器，但每个分区仍然会共享相同的EFI(UEFI规范只允许每个驱动器1个EFI)。您可以判断它是否与disk**X**sY是同一个驱动器(Y只是表示它是哪个分区)。
 
 ![](../images/post-install/oc2hdd-md/hdd-clean.png)
 
