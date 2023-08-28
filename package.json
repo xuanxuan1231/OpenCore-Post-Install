@@ -12,8 +12,10 @@
         "url": "git+https://github.com/dortania/OpenCore-Post-Install.git"
     },
     "scripts": {
-        "dev": "SET NODE_OPTIONS=--openssl-legacy-provider && vuepress dev",
-        "build": "SET NODE_OPTIONS=--openssl-legacy-provider && vuepress build",
+        "windev": "SET NODE_OPTIONS=--openssl-legacy-provider && vuepress dev",
+        "winbuild": "SET NODE_OPTIONS=--openssl-legacy-provider && vuepress build",
+        "dev": "vuepress dev",
+        "build": "vuepress build",
         "fix-lint": "run-script-os",
         "fix-lint:default": "(echo Attempting to fix lint... && markdownlint -c .markdownlint.json -p .markdownlintignore '**/*.md' -f && echo Fixed successfully, please commit.) || (echo Fix failed! && exit 1)",
         "fix-lint:win32": "(echo Attempting to fix lint... && markdownlint -c .markdownlint.json -p .markdownlintignore **/*.md -f && echo Fixed successfully, please commit.) || (echo Fix failed! && exit 1)",
