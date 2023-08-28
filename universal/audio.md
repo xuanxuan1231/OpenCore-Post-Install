@@ -103,9 +103,9 @@ path/to/gfxutil -f HDEF
 
 ### Clover中相同的layout ID不在OpenCore上工作
 
-This is likely do to IRQ conflicts, on Clover there's a whole sweep of ACPI hot-patches that are applied automagically. Fixing this is a little bit painful but [SSDTTime](https://github.com/corpnewt/SSDTTime)'s `FixHPET` option can handle most cases.
+这可能会导致IRQ冲突，在Clover上有一个自动应用的ACPI热补丁。修复这个有点痛苦，但[SSDTTime](https://github.com/corpnewt/SSDTTime)的`FixHPET`选项可以处理大多数情况。
 
-For odd cases where RTC and HPET take IRQs from other devices like USB and audio, you can reference the [HP Compaq DC7900 ACPI patch](https://github.com/khronokernel/trashOS/blob/master/HP-Compaq-DC7900/README.md#dsdt-edits) example in the trashOS repo
+对于RTC和HPET从USB和音频等其他设备获取irq的奇怪情况，您可以参考trashOS repo中的[HP Compaq DC7900 ACPI补丁](https://github.com/khronokernel/trashOS/blob/master/HP-Compaq-DC7900/README.md#dsdt-edits)示例
 
 ### 在10.15中，电源状态改变导致Kernel Panic
 
@@ -118,10 +118,11 @@ For odd cases where RTC and HPET take IRQs from other devices like USB and audio
 
 * [检查你是否有正确的内核扩展](#检查你是否有正确的内核扩展)
 * [检查AppleALC补丁是否正确](#检查applealc补丁是否正确)
-* [检查AppleHDA是否正常](#检查apphda是否正常)
+* [检查AppleHDA是否正常](#检查applehda是否正常)
 * [AppleALC工作不一致](#applealc工作不一致)
 * [AppleALC在多个声卡下不能正常工作](#applealc在多个声卡下不能正常工作)
 * [Windows重启后，AppleALC无法工作](#windows重启后，applealc无法工作)
+* 注意：从此处跳转可能需要双击
 
 ### 检查你是否有正确的内核扩展
 
