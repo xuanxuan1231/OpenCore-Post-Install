@@ -22,7 +22,7 @@ module.exports = {
             href: "/styles/website.css"
         },]
     ],
-    base: './OpenCore-Post-Install/',
+    base: './OpenCore-Post-Install',
 
     watch: {
         $page(newPage, oldPage) {
