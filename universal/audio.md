@@ -8,7 +8,7 @@ kextstat | grep -E "AppleHDA|AppleALC|Lilu"
 
 如果3个都出现，您就可以开始了。并确保**不存在**VoodooHDA。否则这将与AppleALC冲突。
 
-如果您遇到问题，请参阅[问题排查部分](../universal/audio.md#troubleshooting)
+如果您遇到问题，请参阅[问题排查部分](../universal/audio.md#排错)
 
 ## 查找你的layout ID
 
