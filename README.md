@@ -13,21 +13,21 @@ lang: zh-CN
 首先，并非本指南中的每一节都必须完整。取决于每个用户是否觉得自己想做最后的润色或解决某些问题.  
 本指南分为8个部分：
 
-* [通用](#universal)
+* [通用](#通用)
   * 建议所有用户遵守
-* [修复USB](#usb-fixes)
+* [修复USB](#修复usb)
   * 建议所有用户最好遵守
-* [安全性](#security)
+* [安全性](#安全性)
   * 对于关心安全和隐私的人
-* [笔记本的特殊性](#laptop-specifics)
+* [笔记本的特殊性](#笔记本的特殊性)
   * 笔记本电脑用户除以上内容外，还建议遵循此项
-* [美化](#cosmetics)
+* [美化](#美化)
   * 如加入GUI和关闭啰嗦模式（-v）
-* [多重引导](#multiboot)
+* [多重引导](#多重引导)
   * 针对多引导用户的建议
-* [其他](#miscellaneous)
+* [其他](#其他)
   * 其他错误修复，并非所有用户都需要这些修复
-* [图形卡补丁](#gpu-patching)
+* [图形卡补丁](#图形卡补丁)
   * 一个更深入的研究支持各种GPU硬件的变化的macOS补丁
 
 ### 通用
@@ -73,7 +73,7 @@ lang: zh-CN
 
 ### 多重引导
 
-* [OpenCore多重引导（未翻译）](https://dortania.github.io/OpenCore-Multiboot/)
+* [OpenCore多重引导](https://xuanxuan1231.github.io/OpenCore-Multiboot/)
   * 专用OpenCore多重引导指南
 * [设置启动器选项](./multiboot/bootstrap.md)
   * 确保Windows不会从我们的系统中删除OpenCore。
